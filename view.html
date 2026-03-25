@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>All Car Parts</h1>
+
+<a href="index.html">Home</a>
+
+<ul id="list"></ul>
+
+<script>
+fetch("http://localhost:5000/api/v1/car_parts")
+  .then(res => res.json())
+  .then(data => {
+    const list = document.getElementById("list");
+
+    data.forEach(part => {
+      const li = document.createElement("li");
+      li.innerText = part.id + " - " + part.name + " ($" + part.price + ")";
+      list.appendChild(li);
+    });
+  });
+</script>
+
+</body>
+</html>
