@@ -9,7 +9,7 @@
 <ul id="list"></ul>
 
 <script>
-fetch("http://localhost:5000/api/v1/car_parts")
+fetch("https://YOUR-RENDER-URL/api/v1/car_parts")
   .then(res => res.json())
   .then(data => {
     const list = document.getElementById("list");
