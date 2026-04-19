@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Notification Sender</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+    }
+
+    .container {
+      background: white;
+      padding: 32px;
+      border-radius: 16px;
+      width: 360px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #667eea;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 12px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    button:disabled {
+      background: #cccccc;
+      cursor: not-allowed;
+      box-shadow: none;
+      transform: none;
+    }
+
+    #counter {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    #status {
+      margin-top: 10px;
+      color: #667eea;
+      font-size: 14px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h2>Send Notification</h2>
+
+    <input type="text" id="title" placeholder="Enter title (e.g. Assignment Alert)">
+    <input type="text" id="message" placeholder="Enter your message">
+    <input type="text" id="icon" placeholder="Enter icon URL (optional)">
+
+    <button id="sendBtn" onclick="sendNotification()">Send Notification</button>
+
+    <p id="counter">Notifications sent: 0</p>
+    <p id="status"></p>
+  </div>
+
+  <script>
+    let count = sessionStorage.getItem("notificationCount") || 0;
+    count = parseInt(count);
+    document.getElementById("counter").innerText =
+      "Notifications sent: " + count;
+
+    function sendNotification() {
+      const title = document.getElementById("title").value || "Notification";
+      const message = document.getElementById("message").value;
+      const icon = document.getElementById("icon").value ||
+        "https://cdn-icons-png.flaticon.com/512/1827/1827392.png";
+
+      const button = document.getElementById("sendBtn");
+      const status = document.getElementById("status");
+
+      if (!message) {
+        alert("Please enter a message first!");
+        return;
+      }
+
+      button.disabled = true;
+      status.innerText = "Notification will be sent in 5 seconds...";
+
+      if (Notification.permission !== "granted") {
+        Notification.requestPermission().then(permission => {
+          if (permission === "granted") {
+            showNotification(title, message, icon);
+          } else {
+            status.innerText = "Notification permission denied.";
+            button.disabled = false;
+          }
+        });
+      } else {
+        showNotification(title, message, icon);
+      }
+    }
+
+    function showNotification(title, message, icon) {
+      setTimeout(() => {
+        new Notification(title, {
+          body: message,
+          icon: icon
+        });
+
+        count++;
+        sessionStorage.setItem("notificationCount", count);
+        document.getElementById("counter").innerText =
+          "Notifications sent: " + count;
+
+        document.getElementById("status").innerText =
+          "Notification sent successfully ✅";
+
+        document.getElementById("sendBtn").disabled = false;
+      }, 5000);
+    }
+
+    document.addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        sendNotification();
+      }
+    });
+  </script>
+
+</body>
+</html>
