@@ -1,26 +1,100 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Add Car Part</title>
+  <title>Add Car Part</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      width: 360px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 10px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #4facfe;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+
+    #status {
+      margin-top: 15px;
+      text-align: center;
+      font-size: 14px;
+      color: green;
+    }
+
+    .nav {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .nav a {
+      text-decoration: none;
+      color: #4facfe;
+      font-weight: bold;
+      margin: 0 8px;
+    }
+
+    .nav a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
-
-<h2>Add Car Part</h2>
-
-<label>Name:</label><br>
-<input id="name"><br><br>
-
-<label>Category:</label><br>
-<input id="category"><br><br>
-
-<label>Price:</label><br>
-<input id="price" type="number" step="0.01"><br><br>
-
-<label>Stock Quantity:</label><br>
-<input id="stock" type="number"><br><br>
-
-<button onclick="addPart()">Add</button>
-
-add.js
-</body>
-</html>
+  <div class="container">
+    <div class="nav">
+      <a href="index.html">Home</a>
+      <a href="view.html">View Parts</a>
+      <a href="notification.html">Notifications</a>
+    </div>
+<script src="js/add.js"></script>
