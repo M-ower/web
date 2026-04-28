@@ -1,14 +1,253 @@
+<!DOCTYPE html>
 <html>
 <head>
-  <title>Car Parts App</title>
+  <title>Car Parts Management System</title>
+
+  <style>
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background:
+        linear-gradient(rgba(12,12,12,0.85), rgba(12,12,12,0.85)),
+        url("https://images.unsplash.com/photo-1503376780353-7e6692767b70");
+      background-size: cover;
+      background-position: center;
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: #ffffff;
+      width: 1150px;
+      padding: 45px;
+      border-radius: 18px;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 35px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+    }
+
+    h1 {
+      font-size: 34px;
+      margin: 0;
+      color: #111;
+      letter-spacing: 1px;
+    }
+
+    .subtitle {
+      color: #555;
+      margin-top: 6px;
+      font-size: 15px;
+    }
+
+    .hero {
+      display: flex;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+
+    .hero-text {
+      flex: 1;
+    }
+
+    .hero-text h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: #222;
+    }
+
+    .hero-text p {
+      color: #555;
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .hero-image {
+      flex: 1;
+      border-radius: 14px;
+      background-image: url("https://images.unsplash.com/photo-1492144534655-ae79c964c9d7");
+      background-size: cover;
+      background-position: center;
+      min-height: 240px;
+      box-shadow: inset 0 0 0 1px #ddd;
+    }
+
+    .cars {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      margin-bottom: 45px;
+    }
+
+    .car-card {
+      background: #f5f7fb;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.15);
+      text-decoration: none;
+      color: black;
+    }
+
+    .car-card img {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+    }
+
+    .car-card div {
+      padding: 15px;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    .actions {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 25px;
+    }
+
+    .action {
+      background: #ffffff;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 10px 22px rgba(0,0,0,0.18);
+      border-top: 5px solid #0072ff;
+    }
+
+    .action h3 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #222;
+    }
+
+    .action p {
+      color: #555;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .action a {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 10px 18px;
+      background: #0072ff;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .action a:hover {
+      background: #005ad1;
+    }
+
+    .footer {
+      margin-top: 45px;
+      text-align: center;
+      color: #777;
+      font-size: 13px;
+    }
+  </style>
 </head>
+
 <body>
 
-<h1>Car Parts System</h1>
+<div class="container">
 
-<a href="view.html">View Parts</a><br><br>
-<a href="add.html">Add New Part</a><br><br>
-<a href="edit.html">Modify Part</a>
+  <!-- HEADER / LOGO -->
+  <div class="header">
+    <svg class="logo" viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="48" fill="#0072ff"/>
+      <path d="M20 60 L30 45 H70 L80 60 Z" fill="#fff"/>
+      <circle cx="35" cy="62" r="6" fill="#fff"/>
+      <circle cx="65" cy="62" r="6" fill="#fff"/>
+    </svg>
+
+    <div>
+      <h1>Car Parts Management</h1>
+      <div class="subtitle">Professional Automotive Inventory Platform</div>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-text">
+      <h2>Industry‑Grade Auto Parts Control</h2>
+      <p>
+        Manage automotive parts inventory, pricing, and stock levels across
+        multiple vehicle models. Designed for real‑world usage with clean
+        workflows and reliable data handling.
+      </p>
+    </div>
+    <div class="hero-image"></div>
+  </div>
+
+  <!-- CARS -->
+  <div class="cars">
+    <a class="car-card" href="https://www.honda.com/civic" target="_blank">
+      <img src="https://images.unsplash.com/photo-1549924231-f129b911e442">
+      <div>Honda Civic</div>
+    </a>
+    <a class="car-card" href="https://www.toyota.com/camry" target="_blank">
+      <img src="https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8">
+      <div>Toyota Camry</div>
+    </a>
+    <a class="car-card" href="https://www.ford.com/mustang" target="_blank">
+      <img src="https://images.unsplash.com/photo-1503736334956-4c8f8e92946d">
+      <div>Ford Mustang</div>
+    </a>
+    <a class="car-card" href="https://www.bmwusa.com/3-series" target="_blank">
+      <img src="https://images.unsplash.com/photo-1542362567-b07e54358753">
+      <div>BMW 3 Series</div>
+    </a>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+
+    <div class="action">
+      <h3>View Inventory</h3>
+      <p>Browse all available parts, prices, and stock information.</p>
+      <a href="view.html">Open Inventory</a>
+    </div>
+
+    <div class="action">
+      <h3>Add New Parts</h3>
+      <p>Register new automotive parts into the system.</p>
+      <a href="add.html">Add Parts</a>
+    </div>
+
+    <div class="action">
+      <h3>Update Parts</h3>
+      <p>Edit existing records and maintain accurate inventory data.</p>
+      <a href="update.html">Update Inventory</a>
+    </div>
+
+    <div class="action">
+      <h3>Notifications</h3>
+      <p>Send system alerts using browser push notifications.</p>
+      <a href="notification.html">Open Notifications</a>
+    </div>
+
+  </div>
+
+  <div class="footer">
+    © 2026 Car Parts Management System • Web Application Development
+  </div>
+
+</div>
 
 </body>
 </html>
