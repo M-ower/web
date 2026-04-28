@@ -1,25 +1,236 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>View Car Parts</title>
+  <title>Auto Parts Dashboard</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #3db2ff, #00eaff);
+      min-height: 100vh;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 18px;
+      width: 1100px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.25);
+    }
+
+    h2, h3 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background: #f2f8ff;
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      cursor: pointer;
+      text-decoration: none;
+      color: black;
+    }
+
+    .card:hover {
+      background: #e6f2ff;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 15px;
+    }
+
+    input {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      flex: 1;
+    }
+
+    button {
+      padding: 8px 14px;
+      border: none;
+      border-radius: 6px;
+      background: #3db2ff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .checkout {
+      background: #28a745;
+      margin-top: 10px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    thead {
+      background: #3db2ff;
+      color: white;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #f2f8ff;
+    }
+
+    #count, #total {
+      margin-top: 10px;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
 </head>
+
 <body>
 
-<h2>Car Parts List</h2>
+<div class="container">
 
-<table border="1">
-<thead>
-<tr>
-    <th>ID</th>
-    <th>Name</th>
-    <th>Category</th>
-    <th>Price</th>
-    <th>Stock</th>
-</tr>
-</thead>
-<tbody id="output"></tbody>
-</table>
+  <h2>Auto Parts Dashboard</h2>
 
-<script src="view.js"></script>
+  <h3>Cars</h3>
+  <div class="cards" id="carCards"></div>
+
+  <h3>Add New Part</h3>
+  <div class="controls">
+    <input id="newName" placeholder="Part name">
+    <input id="newCategory" placeholder="Category">
+    <input id="newPrice" type="number" placeholder="Price">
+    <input id="newStock" type="number" placeholder="Stock">
+    <button id="addBtn">Add Part</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Price</th>
+        <th>Stock</th>
+      </tr>
+    </thead>
+    <tbody id="output"></tbody>
+  </table>
+
+  <p id="count"></p>
+  <p id="total"></p>
+  <button class="checkout" id="checkoutBtn">Checkout</button>
+
+</div>
+
+<script>
+  const cars = [
+    { name: "Honda Civic", year: 2020, link: "https://www.honda.com/civic" },
+    { name: "Toyota Camry", year: 2021, link: "https://www.toyota.com/camry" },
+    { name: "Ford Mustang", year: 2019, link: "https://www.ford.com/mustang" },
+    { name: "Chevy Malibu", year: 2018, link: "https://www.chevrolet.com/malibu" },
+    { name: "BMW 3 Series", year: 2022, link: "https://www.bmwusa.com/3-series" },
+    { name: "Nissan Altima", year: 2021, link: "https://www.nissanusa.com/altima" }
+  ];
+
+  let parts = [
+    { id: 1, name: "Oil Filter", category: "Engine", price: 9.99, stock: 20 },
+    { id: 2, name: "Brake Pads", category: "Brakes", price: 49.99, stock: 12 },
+    { id: 3, name: "Air Filter", category: "Engine", price: 19.99, stock: 30 },
+    { id: 4, name: "Headlights", category: "Lighting", price: 79.99, stock: 6 },
+    { id: 5, name: "Spark Plugs", category: "Engine", price: 39.99, stock: 18 }
+  ];
+
+  const carCards = document.getElementById("carCards");
+  const output = document.getElementById("output");
+  const count = document.getElementById("count");
+  const total = document.getElementById("total");
+
+  function renderCars() {
+    carCards.innerHTML = "";
+    cars.forEach(c => {
+      const card = document.createElement("a");
+      card.className = "card";
+      card.href = c.link;
+      card.target = "_blank";
+      card.innerHTML = `🚗<strong>${c.name}</strong>${c.year}`;
+      carCards.appendChild(card);
+    });
+  }
+
+  function renderTable() {
+    output.innerHTML = "";
+    let sum = 0;
+
+    parts.forEach(p => {
+      sum += p.price;
+      output.innerHTML += `
+        <tr>
+          <td>${p.id}</td>
+          <td>${p.name}</td>
+          <td>${p.category}</td>
+          <td>$${p.price.toFixed(2)}</td>
+          <td>${p.stock}</td>
+        </tr>
+      `;
+    });
+
+    count.innerText = "Total parts: " + parts.length;
+    total.innerText = "Cart total: $" + sum.toFixed(2);
+  }
+
+  document.getElementById("addBtn").addEventListener("click", () => {
+    const name = newName.value.trim();
+    const category = newCategory.value.trim();
+    const price = parseFloat(newPrice.value);
+    const stock = parseInt(newStock.value);
+
+    if (!name || !category || isNaN(price) || isNaN(stock)) {
+      alert("Fill all fields correctly");
+      return;
+    }
+
+    parts.push({
+      id: parts.length + 1,
+      name,
+      category,
+      price,
+      stock
+    });
+
+    renderTable();
+
+    newName.value = "";
+    newCategory.value = "";
+    newPrice.value = "";
+    newStock.value = "";
+  });
+
+  document.getElementById("checkoutBtn").addEventListener("click", () => {
+    alert("Checkout successful!\n" + total.innerText);
+  });
+
+  renderCars();
+  renderTable();
+</script>
+
 </body>
 </html>
