@@ -6,7 +6,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #4facfe, #00f2fe);
+      background: linear-gradient(135deg, #667eea, #764ba2);
       min-height: 100vh;
       margin: 0;
       display: flex;
@@ -17,12 +17,12 @@
     .container {
       background: white;
       padding: 30px;
-      border-radius: 15px;
-      width: 380px;
+      border-radius: 12px;
+      width: 360px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     }
 
-    h2 {
+    h1 {
       text-align: center;
       margin-bottom: 20px;
       color: #333;
@@ -33,23 +33,26 @@
       margin-bottom: 15px;
     }
 
-    .nav a {
-      text-decoration: none;
-      color: #4facfe;
+    .nav button {
+      background: none;
+      border: none;
+      color: #667eea;
       font-weight: bold;
+      cursor: pointer;
+      font-size: 14px;
     }
 
-    .nav a:hover {
+    .nav button:hover {
       text-decoration: underline;
     }
 
     label {
-      font-weight: bold;
       display: block;
-      margin-top: 12px;
+      margin-top: 10px;
+      font-weight: bold;
     }
 
-    input, select {
+    input {
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -58,16 +61,16 @@
       font-size: 14px;
     }
 
-    input:focus, select:focus {
+    input:focus {
       outline: none;
-      border-color: #4facfe;
+      border-color: #667eea;
     }
 
-    button {
+    button.update {
       width: 100%;
       margin-top: 20px;
       padding: 12px;
-      background: linear-gradient(to right, #4facfe, #00f2fe);
+      background: linear-gradient(to right, #667eea, #764ba2);
       border: none;
       border-radius: 8px;
       color: white;
@@ -76,7 +79,7 @@
       transition: 0.2s;
     }
 
-    button:hover {
+    button.update:hover {
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
@@ -87,32 +90,78 @@
 
   <div class="container">
 
+    <!-- ✅ CLEAN HOME BUTTON -->
     <div class="nav">
-      index.htmlHome</a>
+      <button onclick="goHome()">Home</button>
     </div>
 
-    <h2>Update Car Part</h2>
+    <h1>Update Car Part</h1>
 
-    <label>Select Category</label>
-    <select id="categoryDrop"></select>
+    <form id="form">
+      <label>ID</label>
+      <input type="number" id="id" readonly>
 
-    <label>ID</label>
-    <input id="id" readonly>
+      <label>Name</label>
+      <input type="text" id="name">
 
-    <label>Name</label>
-    <input id="name">
+      <label>Category</label>
+      <input type="text" id="category">
 
-    <label>Price</label>
-    <input id="price" type="number" step="0.01">
+      <label>Price</label>
+      <input type="number" id="price">
 
-    <label>Stock Quantity</label>
-    <input id="stock" type="number">
+      <label>Stock</label>
+      <input type="number" id="stock">
 
-    <button onclick="updatePart()">Update</button>
+      <button class="update" type="submit">Update</button>
+    </form>
 
   </div>
 
-  <script src="update.js"></script>
+  <script>
+    function goHome() {
+      window.location.href = "index.html";
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    const partId = params.get("id");
+
+    if (partId) {
+      fetch("http://localhost:5000/api/v1/car_parts/" + partId)
+        .then(res => res.json())
+        .then(data => {
+          document.getElementById("id").value = data.id;
+          document.getElementById("name").value = data.name;
+          document.getElementById("category").value = data.category;
+          document.getElementById("price").value = data.price;
+          document.getElementById("stock").value = data.stock_quantity;
+        });
+    }
+
+    document.getElementById("form").addEventListener("submit", function(e){
+      e.preventDefault();
+
+      const id = document.getElementById("id").value;
+
+      fetch("http://localhost:5000/api/v1/car_parts/" + id, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          name: document.getElementById("name").value,
+          category: document.getElementById("category").value,
+          price: document.getElementById("price").value,
+          stock_quantity: document.getElementById("stock").value
+        })
+      })
+      .then(res => res.json())
+      .then(() => {
+        alert("Part updated successfully");
+        window.location.href = "view.html";
+      });
+    });
+  </script>
 
 </body>
 </html>
