@@ -6,7 +6,11 @@
   <style>
     body {
       font-family: Arial, sans-serif;
+<<<<<<< HEAD
       background: linear-gradient(135deg, #667eea, #764ba2);
+=======
+      background: linear-gradient(135deg, #4facfe, #00f2fe);
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       min-height: 100vh;
       margin: 0;
       display: flex;
@@ -17,12 +21,21 @@
     .container {
       background: white;
       padding: 30px;
+<<<<<<< HEAD
       border-radius: 12px;
       width: 360px;
       box-shadow: 0 10px 25px rgba(0,0,0,0.25);
     }
 
     h1 {
+=======
+      border-radius: 15px;
+      width: 380px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    }
+
+    h2 {
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       text-align: center;
       margin-bottom: 20px;
       color: #333;
@@ -33,6 +46,7 @@
       margin-bottom: 15px;
     }
 
+<<<<<<< HEAD
     .nav button {
       background: none;
       border: none;
@@ -43,16 +57,34 @@
     }
 
     .nav button:hover {
+=======
+    .nav a {
+      text-decoration: none;
+      color: #4facfe;
+      font-weight: bold;
+    }
+
+    .nav a:hover {
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       text-decoration: underline;
     }
 
     label {
+<<<<<<< HEAD
       display: block;
       margin-top: 10px;
       font-weight: bold;
     }
 
     input {
+=======
+      font-weight: bold;
+      display: block;
+      margin-top: 12px;
+    }
+
+    input, select {
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       width: 100%;
       padding: 10px;
       margin-top: 5px;
@@ -61,6 +93,7 @@
       font-size: 14px;
     }
 
+<<<<<<< HEAD
     input:focus {
       outline: none;
       border-color: #667eea;
@@ -71,6 +104,18 @@
       margin-top: 20px;
       padding: 12px;
       background: linear-gradient(to right, #667eea, #764ba2);
+=======
+    input:focus, select:focus {
+      outline: none;
+      border-color: #4facfe;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       border: none;
       border-radius: 8px;
       color: white;
@@ -79,7 +124,11 @@
       transition: 0.2s;
     }
 
+<<<<<<< HEAD
     button.update:hover {
+=======
+    button:hover {
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
       transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
@@ -90,6 +139,7 @@
 
   <div class="container">
 
+<<<<<<< HEAD
     <!-- ✅ CLEAN HOME BUTTON -->
     <div class="nav">
       <button onclick="goHome()">Home</button>
@@ -162,6 +212,34 @@
       });
     });
   </script>
+=======
+    <div class="nav">
+      index.htmlHome</a>
+    </div>
+
+    <h2>Update Car Part</h2>
+
+    <label>Select Category</label>
+    <select id="categoryDrop"></select>
+
+    <label>ID</label>
+    <input id="id" readonly>
+
+    <label>Name</label>
+    <input id="name">
+
+    <label>Price</label>
+    <input id="price" type="number" step="0.01">
+
+    <label>Stock Quantity</label>
+    <input id="stock" type="number">
+
+    <button onclick="updatePart()">Update</button>
+
+  </div>
+
+  <script src="update.js"></script>
+>>>>>>> f1b45e171d6f4b473c8a1d678019f8dd8a6ea6f5
 
 </body>
 </html>
